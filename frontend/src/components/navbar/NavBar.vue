@@ -32,7 +32,7 @@ import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
 
       <div class="navbar-end">
         <div class="aura">
-          <button class="btn text-base">Sign in</button>
+          <router-link :to="{ name: 'user-account-login' }" active-class="btn-focus" class="btn text-base">Sign in</router-link>
         </div>
       </div>
 
@@ -47,35 +47,35 @@ import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
       <ul class="menu w-full grow">
         <!-- List item -->
         <li class="mt-10 my-2.5">
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="首页">
+          <router-link :to="{ name: 'homepage' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="首页">
             <!-- Home icon -->
             <HomepageIcon />
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">Home</span>
-          </button>
+          </router-link>
         </li>
         <!-- List item -->
         <li class="my-2.5">
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="AI创作">
+          <router-link :to="{ name: 'createfriends' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="AI创作">
             <!-- Home icon -->
             <CreateIcon />
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">Create AI</span>
-          </button>
+          </router-link>
         </li>
         <!-- List item -->
         <li class="my-2.5">
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="Friends">
+          <router-link :to="{ name: 'friendslist' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="Friends">
             <!-- Home icon -->
             <FriendIcon />
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">AI List</span>
-          </button>
+          </router-link>
         </li>
         <!-- List item -->
         <li class="my-2.5">
-          <button class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="Settings">
+          <router-link :to="{ name: 'user-profile' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="Settings">
             <!-- Settings icon -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-6"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg>
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">Settings</span>
-          </button>
+          </router-link>
         </li>
       </ul>
     </div>
