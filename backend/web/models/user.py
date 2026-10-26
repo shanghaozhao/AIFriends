@@ -18,6 +18,6 @@ class UserProfile(models.Model):
     create_time = models.DateTimeField(default=now)
     update_time = models.DateTimeField(default=now)
 
-    # 返回的是你对应的一个键，去索引这个userProfile{user_id, photo, profile, create_time, update_time}
+    # 返回的是你对应的一个键，去索引这个userProfile{id, photo, profile, create_time, update_time}
     def __str__(self):
         return f'{self.user.username} - {localtime(self.create_time).strftime("%Y-%m-%d %H:%M:%S")}'
