@@ -17,13 +17,13 @@ class LoginView(APIView):
                 })
             user = authenticate(username=username, password=password)
             if user:  # 用户名密码正确
-                user_profile = UserProfile.objects.get(username=username)
+                user_profile = UserProfile.objects.get(user=user) # UserProfile只有user这种类型
                 refresh = RefreshToken.for_user(user)  # 生成jwt
                 # 返回这个数据到内存和set_cookie再一次HTTP响应里并行发生
                 response = Response({
                     'result': 'success',
                     'access': str(refresh.access_token),
-                    'user_id': user.id,
+                    'user_id': user.id, # user_id这里因为user.ts定义的
                     'username': user.username,
                     'photo': user_profile.photo.url,  # 必须加url！！！
                     'profile': user_profile.profile,
@@ -41,6 +41,8 @@ class LoginView(APIView):
                 'result': '用户名或密码错误'
             })
         except:
+            import traceback
+            print(traceback.format_exc())
             return Response({
                 'result': '系统异常，请稍后重试'
             })

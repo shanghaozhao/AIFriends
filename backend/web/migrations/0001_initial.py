@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="UserProfile",
+            name="UserProfileIcon",
             fields=[
                 (
                     "id",

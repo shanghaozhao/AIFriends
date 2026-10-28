@@ -5,6 +5,10 @@ import HomepageIcon from "@/components/navbar/icons/HomepageIcon.vue";
 import CreateIcon from "@/components/navbar/icons/CreateIcon.vue";
 import FriendIcon from "@/components/navbar/icons/FriendIcon.vue";
 import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
+import {useUserStore} from "@/stores/user.ts";
+import UserMenu from "@/components/navbar/UserMenu.vue";
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -12,7 +16,7 @@ import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
   <input id="my-drawer-4" type="checkbox" class="drawer-toggle inline" />
   <div class="drawer-content">
     <!-- Navbar -->
-    <nav class="navbar w-full bg-base-200 shadow-base-sm">
+    <nav class="navbar w-full bg-base-100 shadow-base-sm">
       <div class="navbar-start">
         <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost drawer-button">
           <MenuIcon />
@@ -31,9 +35,17 @@ import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
       </div>
 
       <div class="navbar-end">
-        <div class="aura">
-          <router-link :to="{ name: 'user-account-login' }" active-class="btn-focus" class="btn text-base">Sign in</router-link>
-        </div>
+
+        <router-link v-if="userStore.isLogin()" :to="{ name: 'createfriends' }" active-class="btn-focus" class="btn btn-ghost text-base mr-6">
+          <CreateIcon/>
+          Create
+        </router-link>
+
+        <router-link v-if="!userStore.isLogin()" :to="{ name: 'user-account-login' }" active-class="btn-active" class="btn text-base">
+          Sign in
+        </router-link>
+
+        <user-menu v-else/>
       </div>
 
     </nav>
