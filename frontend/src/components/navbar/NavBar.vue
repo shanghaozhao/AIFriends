@@ -41,11 +41,11 @@ const userStore = useUserStore()
           Create
         </router-link>
 
-        <router-link v-if="!userStore.isLogin()" :to="{ name: 'user-account-login' }" active-class="btn-active" class="btn text-base">
+        <router-link v-if="userStore.hasPulledUserInfo && !userStore.isLogin()" :to="{ name: 'user-account-login' }" active-class="btn-active" class="btn text-base">
           Sign in
         </router-link>
 
-        <user-menu v-else/>
+        <user-menu v-else-if="userStore.isLogin()"/>
       </div>
 
     </nav>
