@@ -13,7 +13,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/friends',
+      path: '/friends/',
       name: 'friendslist',
       component: () => import('../views/friends/FriendsView.vue'),
       meta: {
@@ -21,7 +21,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/createfriends',
+      path: '/createfriends/',
       name: 'createfriends',
       component: () => import('../views/create/CreateView.vue'),
       meta: {
@@ -29,7 +29,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/error',
+      path: '/error/',
       name: 'notfound',
       component: () => import('../views/error/NotFoundView.vue'),
       meta: {
@@ -37,7 +37,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/user/account/login',
+      path: '/user/account/login/',
       name: 'user-account-login',
       component: () => import('../views/user/account/LoginView.vue'),
       meta: {
@@ -45,7 +45,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/user/account/register',
+      path: '/user/account/register/',
       name: 'user-account-register',
       component: () => import('../views/user/account/RegisterView.vue'),
       meta: {
@@ -53,7 +53,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/user/space/:user_id',
+      path: '/user/space/:user_id/',
       name: 'user-space',
       component: () => import('../views/user/space/SpaceView.vue'),
       meta: {
@@ -61,7 +61,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/user/profile',
+      path: '/user/profile/',
       name: 'user-profile',
       component: () => import('../views/profile/ProfileView.vue'),
       meta: {
@@ -70,7 +70,7 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      name: 'erro-page',
+      name: 'error-page',
       component: () => import('../views/error/NotFoundView.vue'),
       meta: {
         needLogin: false,
@@ -81,7 +81,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
-  if (to.meta.needLogin && !userStore.isLogin()) {
+  if (to.meta.needLogin && userStore.hasPulledUserInfo && !userStore.isLogin()) {
     return next('/user/account/login')
   }
   return next()
