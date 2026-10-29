@@ -36,7 +36,7 @@ async function handleLogout() {
         <img :src="userStore.photo" />
       </div>
     </div>
-    <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <ul tabindex="-1" class="dropdown-content menu bg-base-100 rounded-box z-1 w-45 p-2 shadow-sm">
       <li>
         <div @click="closeMenu">
           <div class="avatar">
