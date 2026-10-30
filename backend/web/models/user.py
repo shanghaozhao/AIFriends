@@ -7,13 +7,13 @@ from django.utils.timezone import now,localtime
 def photo_upload_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4().hex[10]}.{ext}'
-    return f'users/photos/{instance.user_id}_{filename}'
+    return f'user/photos/{instance.user_id}_{filename}'
 
 
 # 这就定义了一个数据库表
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # 虽然是创建了一个对象user 同时会创建一个外键字段名+_id 即user_id
-    photo = models.ImageField(default='user/photos/default.jpg', upload_to=photo_upload_path)
+    photo = models.ImageField(default='user/photos/default.jpg', upload_to=photo_upload_path) # 这里目前本地当云服务
     profile = models.TextField(default='谢谢你的关注', max_length=500)
     create_time = models.DateTimeField(default=now)
     update_time = models.DateTimeField(default=now)
