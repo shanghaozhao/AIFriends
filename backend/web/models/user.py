@@ -6,7 +6,7 @@ from django.utils.timezone import now,localtime
 
 def photo_upload_path(instance, filename):
     ext = filename.split('.')[-1]
-    filename = f'{uuid.uuid4().hex[10]}.{ext}'
+    filename = f'{uuid.uuid4().hex[:10]}.{ext}'
     return f'user/photos/{instance.user_id}_{filename}'
 
 

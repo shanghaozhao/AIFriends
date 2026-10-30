@@ -7,6 +7,10 @@ from web.views.user.account.logout import LogoutView
 from web.views.user.account.refreshtoken import RefreshTokenView
 from web.views.user.account.register import RegisterView
 from web.views.user.profile.update import UpdateProfileView
+from web.views.character.create import CreateCharacterView
+from web.views.character.update import UpdateCharacterView
+from web.views.character.remove import RemoveCharacterView
+from web.views.character.get_single import GetSingleCharacterView
 
 urlpatterns = [
     # 这里Django做URL匹配前，会先把请求路径的开头/剥掉再去做匹配。vue项目加上/
@@ -16,6 +20,12 @@ urlpatterns = [
     path('api/user/account/refresh_token/', RefreshTokenView.as_view()),
     path('api/user/account/get_user_info/', GetUserInfo.as_view()),
     path('api/user/profile/update/', UpdateProfileView.as_view()),
+
+    path('api/character/create/', CreateCharacterView.as_view()),
+    path('api/character/update/', UpdateCharacterView.as_view()),
+    path('api/character/remove/', RemoveCharacterView.as_view()),
+    path('api/character/get_single/', GetSingleCharacterView.as_view()),
+
     path('', index, name='index'),
 
     # 除了媒体文件、静态文件和资产文件，其他所有请求都返回index,交给vue前端处理url
