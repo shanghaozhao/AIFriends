@@ -8,6 +8,7 @@ import LoginView from "@/views/user/account/LoginView.vue";
 import RegisterView from "@/views/user/account/RegisterView.vue";
 import SpaceView from "@/views/user/space/SpaceView.vue";
 import ProfileView from "@/views/profile/ProfileView.vue";
+import UpdateCharacter from "@/views/create/character/UpdateCharacter.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,9 +30,17 @@ const router = createRouter({
       },
     },
     {
-      path: '/createfriends/',
-      name: 'createfriends',
+      path: '/create/character/',
+      name: 'create-character',
       component: CreateView,
+      meta: {
+        needLogin: true,
+      },
+    },
+    {
+      path: '/update/character/:character_id/', //这里的角色id在url中
+      name: 'update-character',
+      component: UpdateCharacter,
       meta: {
         needLogin: true,
       },

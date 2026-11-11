@@ -36,7 +36,7 @@ const userStore = useUserStore()
 
       <div class="navbar-end">
 
-        <router-link v-if="userStore.isLogin()" :to="{ name: 'createfriends' }" active-class="btn-focus" class="btn btn-ghost text-base mr-6">
+        <router-link v-if="userStore.isLogin()" :to="{ name: 'update-character', params: { character_id: 1 } }" active-class="btn-focus" class="btn btn-ghost text-base mr-6">
           <CreateIcon/>
           Create
         </router-link>
@@ -67,8 +67,8 @@ const userStore = useUserStore()
         </li>
         <!-- List item -->
         <li class="my-2.5">
-          <router-link :to="{ name: 'createfriends' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="AI创作">
-            <!-- Home icon -->
+          <router-link :to="{ name: 'create-character' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="AI创作">
+            <!-- Create icon -->
             <CreateIcon />
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">Create AI</span>
           </router-link>
@@ -76,7 +76,7 @@ const userStore = useUserStore()
         <!-- List item -->
         <li class="my-2.5">
           <router-link :to="{ name: 'friendslist' }" active-class="menu-focus" class="is-drawer-close:tooltip is-drawer-close:tooltip-right py-1.5" data-tip="Friends">
-            <!-- Home icon -->
+            <!-- Friends icon -->
             <FriendIcon />
             <span class="is-drawer-close:hidden text-lg ml-2 whitespace-nowrap">AI List</span>
           </router-link>

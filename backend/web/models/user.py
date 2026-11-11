@@ -12,7 +12,7 @@ def photo_upload_path(instance, filename):
 
 # 这就定义了一个数据库表
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE) # 虽然是创建了一个对象user 同时会创建一个外键字段名+_id 即user_id
+    user = models.OneToOneField(User, on_delete=models.CASCADE) #user 是一个 User 实例 同时会创建一个外键字段名+_id 即user_id 这里OneToOneField, 作者对应的 Django 用户
     photo = models.ImageField(default='user/photos/default.jpg', upload_to=photo_upload_path) # 这里目前本地当云服务
     profile = models.TextField(default='谢谢你的关注', max_length=500)
     create_time = models.DateTimeField(default=now)

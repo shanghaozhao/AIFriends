@@ -12,7 +12,11 @@ class UpdateCharacterView(APIView):
     def post(self, request):
         try:
             character_id = request.data['character_id']
-            # 首先 character_id会自动转化为整数 __user代表是author的属性 更改自己的
+            # 首先 character_id会自动转化为整数
+            # 从 Character 出发,跨到 User 的路径就是: 将. 转换为__
+            # character.author                  → UserProfile 实例(通过外键 author)
+            # character.author.user             → User 实例(通过 UserProfile 的 user 字段)
+            # character.author.user.username    → 'alice'(通过 User 的 username 字段)
             character = Character.objects.get(id=character_id, author__user=request.user)
             name = request.data['name'].strip()
             profile = request.data['profile'].strip()[:100000]
