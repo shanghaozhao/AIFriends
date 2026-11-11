@@ -5,6 +5,7 @@ const props = defineProps({
   username: String,
 });
 const myUsername = ref(props.username);
+// 监听props.username变化并更新myUsername，是在后端更新后能更新
 watch(() => props.username, (newVal) => {
     myUsername.value = newVal;
 })

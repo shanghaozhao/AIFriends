@@ -50,7 +50,7 @@ async function handleUpdate() {
 
 <template>
 <div class="flex justify-center">
-  <div class="card w-120  bg-base-100 shadow-sm mt-20">
+  <div class="card w-120  bg-base-100 shadow-sm mt-16">
     <div class="card-body">
       <h2 class="card-title">编辑个人资料</h2>
       <user-photo-com ref="userphoto-ref" :photo="userStore.photo"/>
@@ -58,7 +58,7 @@ async function handleUpdate() {
       <user-profile-com ref="userprofile-ref" :profile="userStore.profile"/>
 
       <p class="text-red-500">{{ errorMessage }}</p>
-      <btn @click="handleUpdate" class="btn btn-neutral w-3/4 self-center">更新</btn>
+      <button @click="handleUpdate" class="btn btn-neutral w-3/4 self-center">更新</button>
     </div>
   </div>
 </div>

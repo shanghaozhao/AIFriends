@@ -1,5 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {useUserStore} from "@/stores/user.ts";
+import HomepageView from "@/views/homepage/HomepageView.vue";
+import FriendView from "@/views/friends/FriendsView.vue";
+import CreateView from "@/views/create/CreateView.vue";
+import NotFoundView from "@/views/error/NotFoundView.vue";
+import LoginView from "@/views/user/account/LoginView.vue";
+import RegisterView from "@/views/user/account/RegisterView.vue";
+import SpaceView from "@/views/user/space/SpaceView.vue";
+import ProfileView from "@/views/profile/ProfileView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +15,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'homepage',
-      component: () => import('../views/homepage/HomepageView.vue'),
+      component: HomepageView,
       meta: {
         needLogin: false,
       },
@@ -15,7 +23,7 @@ const router = createRouter({
     {
       path: '/friends/',
       name: 'friendslist',
-      component: () => import('../views/friends/FriendsView.vue'),
+      component:FriendView,
       meta: {
         needLogin: true,
       },
@@ -23,7 +31,7 @@ const router = createRouter({
     {
       path: '/createfriends/',
       name: 'createfriends',
-      component: () => import('../views/create/CreateView.vue'),
+      component: CreateView,
       meta: {
         needLogin: true,
       },
@@ -31,7 +39,7 @@ const router = createRouter({
     {
       path: '/error/',
       name: 'notfound',
-      component: () => import('../views/error/NotFoundView.vue'),
+      component: NotFoundView,
       meta: {
         needLogin: false,
       },
@@ -39,7 +47,7 @@ const router = createRouter({
     {
       path: '/user/account/login/',
       name: 'user-account-login',
-      component: () => import('../views/user/account/LoginView.vue'),
+      component: LoginView,
       meta: {
         needLogin: false,
       },
@@ -47,7 +55,7 @@ const router = createRouter({
     {
       path: '/user/account/register/',
       name: 'user-account-register',
-      component: () => import('../views/user/account/RegisterView.vue'),
+      component: RegisterView,
       meta: {
         needLogin: false,
       },
@@ -55,7 +63,7 @@ const router = createRouter({
     {
       path: '/user/space/:user_id/',
       name: 'user-space',
-      component: () => import('../views/user/space/SpaceView.vue'),
+      component: SpaceView,
       meta: {
         needLogin: true,
       },
@@ -63,7 +71,7 @@ const router = createRouter({
     {
       path: '/user/profile/',
       name: 'user-profile',
-      component: () => import('../views/profile/ProfileView.vue'),
+      component: ProfileView,
       meta: {
         needLogin: true,
       },
@@ -71,7 +79,7 @@ const router = createRouter({
     {
       path: '/:pathMatch(.*)*',
       name: 'error-page',
-      component: () => import('../views/error/NotFoundView.vue'),
+      component: NotFoundView,
       meta: {
         needLogin: false,
       },

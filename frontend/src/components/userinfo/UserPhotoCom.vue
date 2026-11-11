@@ -70,12 +70,13 @@ defineExpose({ myPhoto})
 </script>
 
 <template>
-<div class="flex justify-center">
+  <div class="flex justify-center">
     <div class="avatar relative">
-      <div class="w-28 rounded-full">
+      <div v-if="myPhoto" class="w-28 rounded-full">
         <img :src="myPhoto" alt="">
       </div>
-      <div @click="fileInputRef?.click()" class="absolute left-0 top-0 w-28 h-28 flex justify-center items-center bg-black/20 rounded-full cursor-pointer">
+      <div v-else class="w-28 h-28 rounded-full bg-base-200"></div>
+      <div @click="fileInputRef?.click()" class="w-28 h-28 bg-black/20 rounded-full absolute top-0 left-0 flex justify-center items-center cursor-pointer">
         <CameraIcon />
       </div>
     </div>
