@@ -1,8 +1,11 @@
+from os import remove
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 from web.models.character import Character
+from web.views.utils.photo import remove_old_photo
 
 
 class RemoveCharacterView(APIView):
@@ -11,7 +14,10 @@ class RemoveCharacterView(APIView):
         try:
             character_id = request.data['character_id']
             # 同样的这里的__user代表是author的属性 删除自己的
-            Character.objects.filter(pk=character_id, author__user=request.user).delete()
+            character = Character.objects.get(pk=character_id, author__user=request.user)
+            remove_old_photo(character.photo)
+            remove_old_photo(character.background_image)
+            character.delete()
             return Response({
                 'result': 'success',
             })

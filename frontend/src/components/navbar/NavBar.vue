@@ -36,7 +36,7 @@ const userStore = useUserStore()
 
       <div class="navbar-end">
 
-        <router-link v-if="userStore.isLogin()" :to="{ name: 'update-character', params: { character_id: 1 } }" active-class="btn-focus" class="btn btn-ghost text-base mr-6">
+        <router-link v-if="userStore.isLogin()" :to="{ name: 'create-character' }" active-class="btn-focus" class="btn btn-ghost text-base mr-6">
           <CreateIcon/>
           Create
         </router-link>
