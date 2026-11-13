@@ -99,9 +99,11 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
   if (to.meta.needLogin && userStore.hasPulledUserInfo && !userStore.isLogin()) {
-    return next('/user/account/login')
+    return {
+      name: 'user-account-login',
+    }
   }
-  return next()
+  return true
 })
 
 export default router
