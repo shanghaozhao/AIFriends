@@ -11,6 +11,7 @@ from web.views.character.create import CreateCharacterView
 from web.views.character.update import UpdateCharacterView
 from web.views.character.remove import RemoveCharacterView
 from web.views.character.get_single import GetSingleCharacterView
+from web.views.character.get_list import GetListCharacterView
 
 urlpatterns = [
     # 这里Django做URL匹配前，会先把请求路径的开头/剥掉再去做匹配。vue项目加上/
@@ -25,6 +26,7 @@ urlpatterns = [
     path('api/character/update/', UpdateCharacterView.as_view()),
     path('api/character/remove/', RemoveCharacterView.as_view()),
     path('api/character/get_single/', GetSingleCharacterView.as_view()),
+        path('api/character/get_list/', GetListCharacterView.as_view()),
 
     path('', index, name='index'),
 
