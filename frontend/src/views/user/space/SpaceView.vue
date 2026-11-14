@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router'
 import UserInfoCom from "@/components/userspace/UserInfoCom.vue";
 import {nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
 import api from "@/js/http/api.ts";
+import CharacterCom from "@/components/userspace/CharacterCom.vue";
 const route = useRoute()
 
 const userProfile = ref(null)
@@ -83,7 +84,12 @@ onBeforeUnmount(() => {
     <!-- 这里用的是flex-col,主轴变成上下排列，items_center变成水平居中 -->
     <user-info-com :userProfile="userProfile"/>
     <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-9 mt-12 justify-items-center w-full px-9">
-
+      <character-com
+          v-for="character in characters"
+          :key="character.id"
+          :character="character"
+          :canEdit="true"
+      />
     </div>
 
     <div ref="sentinel-ref" class="h-2 mt-8 w-100 bg-red-500"></div>
