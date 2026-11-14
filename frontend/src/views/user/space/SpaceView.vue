@@ -71,8 +71,14 @@ onMounted(async () => {
   )
 
   //监听哨兵元素， 每次哨兵被看到时，都会触发一次
-  observer.observe(sentinelRef?.value)
+  if (sentinelRef.value) { //加一个判断前端不会显示报错
+    observer.observe(sentinelRef.value)
+  }
 })
+
+function removeCharacter(characterId: number){
+  characters.value = characters.value.filter(character => character.id !== characterId)
+}
 
 onBeforeUnmount(() => {
   observer?.disconnect()  // 解绑监听器
@@ -89,10 +95,11 @@ onBeforeUnmount(() => {
           :key="character.id"
           :character="character"
           :canEdit="true"
+          @remove="removeCharacter"
       />
     </div>
 
-    <div ref="sentinel-ref" class="h-2 mt-8 w-100 bg-red-500"></div>
+    <div ref="sentinel-ref" class="h-2 mt-8"></div>
 
     <div v-if="isLoading" class="text-gray-500 mt-4">加载中...</div>
     <div v-else-if="!hasCharacters" class="text-gray-500 mt-4">没有更多角色了</div>

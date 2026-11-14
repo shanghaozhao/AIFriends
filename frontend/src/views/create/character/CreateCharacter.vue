@@ -37,7 +37,7 @@ async function handleCreate() {
       const res = await api.post('/api/character/create/', formData);
       const data = res.data;
       if (data.result === 'success') {
-        console.log("角色创建成功");
+        // console.log("角色创建成功");
         await router.push({
           name: "user-space",
           params: {user_id: userStore.id}
