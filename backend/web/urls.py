@@ -1,5 +1,6 @@
 from django.urls import path, re_path
 
+from web.views.homepage.homeindex import HomeIndexView
 from web.views.index import index
 from web.views.user.account.getUserInfo import GetUserInfo
 from web.views.user.account.login import LoginView
@@ -26,7 +27,9 @@ urlpatterns = [
     path('api/character/update/', UpdateCharacterView.as_view()),
     path('api/character/remove/', RemoveCharacterView.as_view()),
     path('api/character/get_single/', GetSingleCharacterView.as_view()),
-        path('api/character/get_list/', GetListCharacterView.as_view()),
+    path('api/character/get_list/', GetListCharacterView.as_view()),
+
+    path('api/homepage/index/', HomeIndexView.as_view()),
 
     path('', index, name='index'),
 
