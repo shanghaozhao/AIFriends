@@ -1,13 +1,15 @@
 <script setup lang="ts">
 
-import {nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef} from "vue";
+import {nextTick, onBeforeUnmount, onMounted, ref, useTemplateRef, watch} from "vue";
 import api from "@/js/http/api.ts";
+import {useRoute} from "vue-router";
 import CharacterCom from "@/components/userspace/CharacterCom.vue";
 
 const isLoading = ref(false);
 const hasCharacters = ref(true);
 const characters = ref([]);
 const sentinelRef = useTemplateRef('sentinel-ref');
+const route = useRoute()
 
 function checkSentinelVisible() {  // 判断哨兵是否能被看到
   if (!sentinelRef.value) return false
@@ -25,6 +27,7 @@ async function loadMore() {
     const res = await api.get('/api/homepage/index/', {
       params: {
         items_count: characters.value.length,
+        search_query: route.query.q || '',
       }
     })
     const data = res.data
@@ -39,7 +42,7 @@ async function loadMore() {
       hasCharacters.value = false
     } else {
       characters.value = characters.value.concat(newCharacters)
-      await nextTick()
+      await nextTick() // 等待 DOM 更新
 
       if (checkSentinelVisible()) {
         await loadMore()
@@ -69,6 +72,14 @@ onMounted(async () => {
   }
 })
 
+watch(() => route.query.q , newQ => {
+  characters.value = []
+  hasCharacters.value = true
+  isLoading.value = false
+  nextTick(() => { //数据变了 → DOM 渲染完 → 再读 DOM 位置
+    loadMore()
+  })
+})
 onBeforeUnmount(() => {
   observer?.disconnect()
 })

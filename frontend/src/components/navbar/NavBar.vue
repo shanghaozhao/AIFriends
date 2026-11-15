@@ -7,8 +7,24 @@ import FriendIcon from "@/components/navbar/icons/FriendIcon.vue";
 import SearcheIcon from "@/components/navbar/icons/SearcheIcon.vue";
 import {useUserStore} from "@/stores/user.ts";
 import UserMenu from "@/components/navbar/UserMenu.vue";
+import {ref, watch} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 const userStore = useUserStore()
+const searchQuery = ref('')
+const router = useRouter()
+const route = useRoute()
+
+//这里是因为 route.query.q需要等到渲染homepage之后才能有值，所以需要监听具体在视频1:36:00
+watch(() => route.query.q, newQ => {
+    searchQuery.value = newQ || ''
+})
+function handleSearch() {
+  router.push({
+    name: 'homepage',
+    query: { q: searchQuery.value.trim() }
+  })
+}
 </script>
 
 <template>
@@ -25,13 +41,14 @@ const userStore = useUserStore()
       </div>
 
       <div class="navbar-center">
-        <div class="join">
-          <input class="input join-item w-96 max-w-full rounded-l-full" placeholder="搜索你感兴趣的内容" />
+        <form @submit.prevent="handleSearch" class="join">
+          <input v-model="searchQuery" class="input join-item w-96 max-w-full rounded-l-full" placeholder="搜索你感兴趣的内容" />
+
           <button class="btn join-item rounded-r-full gap-0">
             <SearcheIcon />
             Search
           </button>
-        </div>
+        </form>
       </div>
 
       <div class="navbar-end">

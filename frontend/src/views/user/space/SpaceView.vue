@@ -89,7 +89,7 @@ onBeforeUnmount(() => {
   <div class="flex flex-col items-center">
     <!-- 这里用的是flex-col,主轴变成上下排列，items_center变成水平居中 -->
     <user-info-com :userProfile="userProfile"/>
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-9 mt-12 justify-items-center w-full px-9">
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-9 mt-10 justify-items-center w-full px-9">
       <character-com
           v-for="character in characters"
           :key="character.id"
