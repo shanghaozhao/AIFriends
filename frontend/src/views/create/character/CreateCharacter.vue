@@ -54,8 +54,8 @@ async function handleCreate() {
 
 <template>
   <div class="flex justify-center items-center flex-col">
-    <div class="card w-120 bg-base-100 shadow-sm mt-6">
-      <div class="title text-xl font-bold m-3">
+    <div class="card w-120 bg-base-100 shadow-sm mt-1">
+      <div class="title text-xl font-bold m-1">
         创建角色
       </div>
       <div class="card-body">
@@ -68,7 +68,7 @@ async function handleCreate() {
       <div v-if="errorMessage" class="text-red-300 text-center">{{ errorMessage }}</div>
 
       <div class="card-actions justify-center">
-        <button @click="handleCreate" class="btn btn-accent w-60 my-3">创建角色</button>
+        <button @click="handleCreate" class="btn btn-accent w-60">创建角色</button>
       </div>
     </div>
   </div>
