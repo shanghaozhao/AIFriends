@@ -1,0 +1,34 @@
+import os
+from typing import TypedDict, Annotated, Sequence
+
+from langchain_core.messages import BaseMessage
+from langchain_openai import ChatOpenAI
+from langgraph.constants import START, END
+from langgraph.graph import add_messages, StateGraph
+
+
+class ChatGraph:
+    @staticmethod
+    def create_app():
+        llm = ChatOpenAI(
+            model="qwen3.7-max",
+            openai_api_key=os.getenv("API_KEY"),
+            openai_api_base=os.getenv("API_BASE")
+        )
+
+        # 定义状态，添加节点，添加边
+        class AgentState(TypedDict):
+            messages: Annotated[Sequence[BaseMessage], add_messages]
+
+        # 执行的逻辑 前后节点的数据流传递
+        def model_call(state: AgentState) -> AgentState:
+            res = llm.invoke(state["messages"])
+            return {"messages": res}
+
+        graph = StateGraph(AgentState)
+        graph.add_node("model", model_call)
+
+        graph.add_edge(START,"agent")
+        graph.add_edge("agent", END)
+
+        return graph.compile()
