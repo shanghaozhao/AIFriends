@@ -4,6 +4,8 @@ from django.contrib import admin
 from web.models.user import UserProfile # 需要从软件包开始引用
 from web.models.character import Character
 from web.models.friend import Friend
+from web.models.friend import Message
+
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -16,6 +18,10 @@ class Character(admin.ModelAdmin):
 @admin.register(Friend)
 class FriendAdmin(admin.ModelAdmin):
     raw_id_fields = ("me", "character")
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    raw_id_fields = ("friend",)
 
 
 # 执行python manage.py makemigrations # 更新数据库

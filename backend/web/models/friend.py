@@ -15,3 +15,16 @@ class Friend(models.Model):
     def __str__(self):
         return f"{self.me.user.username} - {self.character.name} - {localtime(self.create_time).strftime('%Y-%m-%d %H:%M:%S')}"
 
+
+class Message(models.Model):
+    friend = models.ForeignKey(Friend, on_delete=models.CASCADE)
+    user_message = models.TextField(max_length=500)
+    input = models.TextField(max_length=500)
+    output = models.TextField(max_length=500)
+    input_tokens = models.IntegerField(max_length=0)
+    output_tokens = models.IntegerField(max_length=0)
+    total_tokens = models.IntegerField(max_length=0)
+    create_time = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.friend.me.user.username} - {self.friend.character.name} - {self.user_message[:50]} - {localtime(self.create_time).strftime('%Y-%m-%d %H:%M:%S')}"
