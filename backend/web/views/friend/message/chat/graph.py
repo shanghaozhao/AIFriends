@@ -11,7 +11,7 @@ class ChatGraph:
     @staticmethod
     def create_app():
         llm = ChatOpenAI(
-            model="qwen3.7-max",
+            model="qwen3.8-max",
             openai_api_key=os.getenv("API_KEY"),
             openai_api_base=os.getenv("API_BASE")
         )
@@ -26,7 +26,7 @@ class ChatGraph:
             return {"messages": res}
 
         graph = StateGraph(AgentState)
-        graph.add_node("model", model_call)
+        graph.add_node("agent", model_call)
 
         graph.add_edge(START,"agent")
         graph.add_edge("agent", END)
