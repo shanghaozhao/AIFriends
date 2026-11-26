@@ -3,26 +3,43 @@ import SendIcon from "@/components/friend/icons/SendIcon.vue";
 import MicIcon from "@/components/friend/icons/MicIcon.vue";
 import {ref, useTemplateRef} from "vue";
 import api from "@/js/http/api.ts";
+import streamApi from "@/js/http/streamApi.ts";
 
 const props = defineProps(['friendId'])
 const inputRef = useTemplateRef('input-ref')
 const message = ref('')
+let isRecording = false
 
 function focus() {
   inputRef.value.focus()
 }
 
 async function handleSend(){
+  if (isRecording) return
+  isRecording = true
+
   const content = message.value.trim()
   if (!content) return
   message.value = ''
 
   try{
-    const res = await api.post('api/friend/message/chat/',{
-      friend_id: props.friendId,
-      message: content
+    await streamApi('/api/friend/message/chat/',{
+      //以下这些实在api中定义好的
+      body:{
+        friend_id: props.friendId,
+        message: content
+      },
+      onmessage(data,isDone){
+        if(isDone){
+          isRecording = false
+        }else if (data.content){
+          console.log(data.content)
+        }
+      },
+      onerror(error){
+        isRecording = false
+      }
     })
-    console.log(res)
   }catch(error){
     console.log(error)
   }
